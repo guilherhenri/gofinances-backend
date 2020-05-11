@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { uuid } from 'uuidv4';
+import Transaction from '../models/Transaction';
 // import TransactionsRepository from '../repositories/TransactionsRepository';
 // import CreateTransactionService from '../services/CreateTransactionService';
 
 const transactionRouter = Router();
 
-const appointments = [];
+const transactions: Transaction[] = [];
 
 // const transactionsRepository = new TransactionsRepository();
 
@@ -20,16 +20,15 @@ transactionRouter.post('/', (request, response) => {
   try {
     const { title, value, type } = request.body;
 
-    const appointment = {
-      id: uuid(),
+    const transaction = new Transaction({
       title,
       value,
       type,
-    };
+    });
 
-    appointments.push(appointment);
+    transactions.push(transaction);
 
-    return response.json(appointment);
+    return response.json(transaction);
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
