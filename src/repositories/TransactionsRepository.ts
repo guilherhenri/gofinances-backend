@@ -14,7 +14,7 @@ class TransactionsRepository {
   }
 
   public all(): Transaction[] {
-    // TODO
+    return this.transactions;
   }
 
   public getBalance(): Balance {
@@ -26,7 +26,7 @@ class TransactionsRepository {
       (a, b) => (b.type === 'outcome' ? a + (b.value || 0) : a),
       0,
     );
-    const total = this.transactions.reduce((a, b) => a + (b.value || 0), 0);
+    const total = income - outcome;
 
     const balance = {
       income,
